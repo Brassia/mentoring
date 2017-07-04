@@ -132,16 +132,7 @@ function repeatString(value, count) {
  */
 
 function removeFirstOccurrences(str, value) {
-    var paramLength = value.length, // length of the occurance
-        startPos = str.indexOf(value), // start position of the occurance
-        endPos = startPos + paramLength -1, // end position of the occurance
-        result;
-    if (str.includes(value)) {
-        result = str.substring(0, startPos) + str.substring(endPos + 1);
-        return result;
-    } else {
-        return str;
-    }
+    return str.replace(value, "");
 }
 
 /**
@@ -212,12 +203,15 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-     throw new Error('Not implemented');
+    var firstString = '┌' + '─'.repeat(width - 2) + '┐'+ '\n';
+    var middleString = '│' + ' '.repeat(width - 2) + '│' + '\n';
+    var lastString = '└' + '─'.repeat(width - 2) + '┘' + '\n';
+    return firstString + middleString.repeat(height - 2) + lastString;
 }
 
 
 
-/**
+    /**
  * Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
  *
