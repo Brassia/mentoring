@@ -70,7 +70,7 @@ function getStringFromTemplate(firstName, lastName) {
  */
 function extractNameFromTemplate(value) {
     var startPos = "Hello, ".length;
-    return value.slice(startPos);
+    return value.slice(startPos, value.length - 1);
 }
 
 
@@ -137,11 +137,7 @@ function removeFirstOccurrences(str, value) {
         endPos = startPos + paramLength -1, // end position of the occurance
         result;
     if (str.includes(value)) {
-        if (str.charAt(endPos + 1) == ' ') {
-            result = str.substring(0, startPos) + str.substring(endPos + 2);
-        } else {
-            result = str.substring(0, startPos) + str.substring(endPos + 1);
-        }
+        result = str.substring(0, startPos) + str.substring(endPos + 1);
         return result;
     } else {
         return str;
@@ -269,7 +265,10 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    (typeof(value) === "string" || (value instanceof String)) ? console.log(true) : console.log(false);
+    if (!(typeof(value) === "string" || (value instanceof String))) {
+        return false;
+    }
+    return true;
 }
 
 
@@ -297,8 +296,14 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(value) {    
-     throw new Error('Not implemented');
+
+function getCardId(value) {
+    var deck = ['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣', 'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦', 'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥', 'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'];
+    for (var i = 0; i < deck.length; i++) {
+        if (value === deck[i]) {
+            return i;
+        }
+    }
 }
 
 
