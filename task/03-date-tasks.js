@@ -39,7 +39,7 @@ function parseDataFromRfc2822(value) {
 function parseDataFromIso8601(value) {
     return Date.parse(value);
 }
-
+ 
 
 /**
  * Returns true if specified date is leap year and false otherwise
