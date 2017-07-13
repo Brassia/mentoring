@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   return Date.parse(value);
+    return Date.parse(value);
 }
 
 
@@ -55,9 +55,10 @@ function parseDataFromIso8601(value) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
+
 function isLeapYear(date) {
     var year = date.getFullYear();
-   return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? true : false;
+    return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
 }
 
 
@@ -77,11 +78,8 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-
-var diff = endDate.getTime() - startDate.getTime();
-
-
-return (diff);
+    var diff = new Date(endDate - startDate).toISOString();
+    return diff.toString().substring(11, diff.length-1);
 }
 
 
@@ -98,12 +96,15 @@ return (diff);
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
+
 function angleBetweenClockHands(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var totalAngleDegree = Math.abs(0.5 *(60*hours - 11*minutes));
-	var	 totalAngle = totalAngleDegree*Math.PI / 180;
-    return totalAngle; 
+    var hours = new Date(date).getUTCHours(),
+        min = new Date(date).getUTCMinutes(),
+        angle = Math.abs(0.5 * (60 * hours - 11* min));
+    while (angle > 180) {
+        angle = Math.abs(360 - angle);
+    }
+    return angle * Math.PI / 180 ;
 }
 
 
