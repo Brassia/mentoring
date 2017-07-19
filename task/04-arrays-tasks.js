@@ -333,12 +333,12 @@ function getSecondItems(arr) {
 // #16
 function propagateItemsByPositionIndex(arr) {
     var newArray = [];
-     arr.forEach(function(value, index) {
-         for (var i = 0; i <= index; i++) {
-         newArray.push(value);
-         }
-     });
-     return newArray;
+    arr.map(function(value, index) {
+        for (var i = 0; i <= index; i++) {
+            newArray.push(value);
+        }
+    });
+    return newArray;
 }
 
 
@@ -402,11 +402,11 @@ function getPositivesCount(arr) {
 // #19
 function sortDigitNamesByNumericOrder(arr) {
     var initArray = ['zero','one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-    arr.forEach(function(value, index){
+    arr.map(function(value, index){
         return arr[index] = initArray.indexOf(value);
     });
     arr.sort();
-    arr.forEach(function(value, index) {
+    arr.map(function(value, index) {
         if (arr[index] = initArray.indexOf(value)) {
             return arr[index] = initArray[value];
         }
