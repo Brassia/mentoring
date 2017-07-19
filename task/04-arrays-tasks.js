@@ -332,11 +332,11 @@ function getSecondItems(arr) {
 
 // #16
 function propagateItemsByPositionIndex(arr) {
-    var newArray = [];
+    var newArray = [], tempArray = [];
     arr.map(function(value, index) {
-        for (var i = 0; i <= index; i++) {
-            newArray.push(value);
-        }
+        tempArray.length = index + 1;
+        tempArray.fill(value);
+        newArray = newArray.concat(tempArray);
     });
     return newArray;
 }
@@ -622,14 +622,10 @@ function getIntervalArray(start, end) {
 // #27
 
 function distinct(arr) {
-    arr.forEach(function(value, index) {
-        for (var i = 0; i < arr.length; i++) {
-            if ((value == arr[i]) && (index != i)) {
-                arr.splice(i, 1);
-            }
-        }
-    });
-    return arr;
+    function equal(value, index, arr) {
+        return arr.indexOf(value) === index
+    }
+    return arr.filter(equal);
 }
 
 
