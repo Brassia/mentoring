@@ -663,7 +663,19 @@ function distinct(arr) {
 
 // #28
 function group(array, keySelector, valueSelector) {
-    throw new Error('Not implemented');
+    var myMap = new Map();
+    array.map(function(value, index, item) {
+        var key,
+            value;
+        key = keySelector(item);
+        value = valueSelector(item);
+        if (!(myMap.has(key))) {
+            myMap.set(key, value);
+        } else {
+            myMap.set(value);
+        }
+    });
+    return myMap;
 }
 
 
