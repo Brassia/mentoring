@@ -704,11 +704,12 @@ function selectMany(arr, childrenSelector) {
  */
 
 // #30
+
 function getElementByIndexes(arr, indexes) {
-    for (var i = 0; i < indexes.length; i++) {
-        arr = arr[indexes[i]];
-    }
-    return arr;
+    return indexes.reduce(function(previousValue, currentValue, index){
+        arr = arr[indexes[index]];
+        return arr;
+    }, arr);
 }
 
 
