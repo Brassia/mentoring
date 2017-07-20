@@ -571,14 +571,13 @@ function sortCitiesArray(arr) {
 
 // #25
 function getIdentityMatrix(n) {
-    var arr = [];
-    for (var col = 0; col < n; col++) {
-        var oneDim = [];
-        for (var row = 0; row < n; row++)  {
-            oneDim.push((col == row) ? 1 : 0);
-        }
-        arr.push(oneDim);
-    }
+    var arr = new Array(n);
+    arr = arr.fill(0);
+    arr = arr.map(function(value, index) {
+        arr[index] = new Array(n).fill(0);
+        arr[index][index] = 1;
+        return arr[index];
+    });
     return arr;
 }
 
