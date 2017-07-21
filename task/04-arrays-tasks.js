@@ -664,15 +664,17 @@ function distinct(arr) {
 // #28
 function group(array, keySelector, valueSelector) {
     var myMap = new Map();
-    array.map(function(value, index, item) {
-        var key,
-            value;
-        key = keySelector(item);
-        value = valueSelector(item);
-        if (!(myMap.has(key))) {
-            myMap.set(key, value);
+    array.map(function(value, item) {
+        var keySel,
+            valueSel,
+            valueArray = [];
+        keySel = keySelector(value);
+        valueSel = valueSelector(value);
+        valueArray.push(valueSel);
+        if (!(myMap.has(keySel))) {
+            myMap.set(keySel, valueArray);
         } else {
-            myMap.set(value);
+            myMap.get(keySel).push(valueSel);;
         }
     });
     return myMap;
