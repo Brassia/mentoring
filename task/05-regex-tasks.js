@@ -31,7 +31,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
+    return new RegExp("^{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}}");
 }
 
 
@@ -53,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+    return new RegExp("p[a, i, o]t");
 }
 
 
@@ -71,8 +71,11 @@ function getRegexForPitSpot() {
  *
  * @return {RegExp}
  */
+
+/* 1) я пробовала заменять [0-9] на \d, но почему-то не работает тогда. почему?
+*  2) проверяла выражения на https://regex101.com/, без знака $ показывает false для 300.0.0.0 и 127.0.0.-1, браузер же показывает true */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+    return new RegExp("^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|0[0-9]{2}|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|0[0-9]{2}|[0-9])$") ;
 }
 
 
@@ -91,7 +94,7 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+    return new RegExp("^(?!000)([0-9]{3}-(?!00)[0-9]{2}-(?!0000)[0-9]{4})");
 }
 
 
@@ -115,8 +118,9 @@ function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
+
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+    return new RegExp("(?=.{" + minLength + ",})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])([a-zA-Z0-9]+)$");
 }
 
 
