@@ -32,14 +32,15 @@
 
 // #1
 function getFizzBuzz(num) {
-    if ((num % 5 == 0) && (num % 3 == 0)) {
-        return "FizzBuzz";
-    } else if (num % 3 == 0) {
-        return "Fizz";
-    } else if (num % 5 == 0) {
-        return "Buzz";
-    } else {
-        return num;
+    switch (true) {
+        case ((num % 5 == 0) && (num % 3 == 0)):
+            return "FizzBuzz";
+        case  (num % 3 == 0):
+            return "Fizz";
+        case  (num % 5 == 0):
+            return "Buzz";
+        default:
+            return num;
     }
 }
 
@@ -255,13 +256,9 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
         result += '('
     }
     if (a > b) {
-        result += b;
-        result += ', ';
-        result += a;
+        result = result.concat(b).concat(', ').concat(a);
     } else {
-        result += a;
-        result += ', ';
-        result += b;
+        result = result.concat(a).concat(', ').concat(b);
     }
     if (isEndIncluded == true) {
         result += ']';
@@ -513,45 +510,42 @@ function timespanToHumanString(startDate, endDate) {
         }
         return result;
     }
-    if (diff <= 45) {
-        return 'a few seconds ago';
-    }
-    if (diff >45 && diff <= 90 ) {
-        return 'a minute ago';
-    }
-    if (diff > 90 && diff <= 45 * secToMin ) {
-        shortenedDiff = diff / secToMin;
-        return roundMe(shortenedDiff, ' minutes ago');
-    }
-    if (diff > 45 * secToMin && diff <= 90 * secToMin) {
-        return 'an hour ago';
-    }
-    if (diff > 90 * secToMin && diff <= 22 * secToHours) {
-        shortenedDiff = diff / secToHours;
-        return roundMe(shortenedDiff, ' hours ago');
-    }
-    if (diff > 22 * secToHours && diff <= 36 * secToHours ) {
-        return 'a day ago';
-    }
-    if (diff > 36 * secToHours && diff <= 25 * secToDays) {
-        shortenedDiff = diff / secToDays;
-        return roundMe(shortenedDiff, ' days ago');
-    }
-    if (diff > 25 * secToDays && diff <= 45 * secToDays) {
-        return 'a month ago';
-    }
-    if (diff > 45 * secToDays && diff <= 345 * secToDays) {
-        shortenedDiff = diff / secToMonths;
-        return roundMe(shortenedDiff, ' months ago');
-    }
-    if (diff > 345 * secToDays && diff <= 545 * secToDays ) {
-        return 'a year ago';
-    }
-    if (diff > 545 * secToDays ) {
-        shortenedDiff = diff / secToYears;
-        return roundMe(shortenedDiff, ' years ago');
-    }
+    switch (true) {
+        case (diff <= 45):
+            return 'a few seconds ago';
+        case (diff >45 && diff <= 90 ):
+            return 'a minute ago';
+        case (diff > 90 && diff <= 45 * secToMin ):
+            shortenedDiff = diff / secToMin;
+            return roundMe(shortenedDiff, ' minutes ago');
+        case (diff > 45 * secToMin && diff <= 90 * secToMin):
+            return 'an hour ago';
 
+        case (diff > 90 * secToMin && diff <= 22 * secToHours):
+            shortenedDiff = diff / secToHours;
+            return roundMe(shortenedDiff, ' hours ago');
+
+        case (diff > 22 * secToHours && diff <= 36 * secToHours ):
+            return 'a day ago';
+
+        case (diff > 36 * secToHours && diff <= 25 * secToDays):
+            shortenedDiff = diff / secToDays;
+            return roundMe(shortenedDiff, ' days ago');
+
+        case (diff > 25 * secToDays && diff <= 45 * secToDays):
+            return 'a month ago';
+
+        case (diff > 45 * secToDays && diff <= 345 * secToDays):
+            shortenedDiff = diff / secToMonths;
+            return roundMe(shortenedDiff, ' months ago');
+
+        case (diff > 345 * secToDays && diff <= 545 * secToDays ):
+            return 'a year ago';
+
+        case (diff > 545 * secToDays ):
+            shortenedDiff = diff / secToYears;
+            return roundMe(shortenedDiff, ' years ago');
+    }
 }
 
 
