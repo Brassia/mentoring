@@ -26,7 +26,9 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    return function(x) {
+        return f(g(x));
+    }
 }
 
 
@@ -46,9 +48,14 @@ function getComposition(f,g) {
  *   power05(16) => 4
  *
  */
+
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function(x) {
+        return Math.pow(x, exponent);
+    }
 }
+
+
 
 
 /**
@@ -64,10 +71,17 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-    throw new Error('Not implemented');
-}
 
+function getPolynom() {
+    var args = [].slice.call(arguments);
+    return function(x) {
+        var sum = 0;
+        for (var i = 0; i< args.length; i++) {
+            sum+=(args[i] * Math.pow(x, args.length - i - 1));
+        }
+        return sum;
+    };
+}
 
 /**
  * Memoizes passed function and returns function
@@ -84,7 +98,18 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    var cache = {};
+    return function() {
+        var key;
+        if(cache[key]) {
+            return cache[key];
+        }
+        else {
+            var val = func.apply(this, arguments);
+            cache[key] = val;
+            return val;
+        }
+    };
 }
 
 
@@ -103,9 +128,10 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(func, attempts) {
+
+function retry(func, maxAttemps) {
     throw new Error('Not implemented');
-}
+};
 
 
 /**
@@ -131,6 +157,12 @@ function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
+/*function logger(func, logFunc) {
+
+    throw new Error('Not implemented');
+}*/
+
+
 function logger(func, logFunc) {
     throw new Error('Not implemented');
 }
@@ -149,8 +181,12 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+
+function partialUsingArguments() {
+    var args = [].slice.call(arguments).slice(1).join("");
+    return function() {
+        return args + [].slice.call(arguments).join("");
+    }
 }
 
 
@@ -170,8 +206,11 @@ function partialUsingArguments(fn) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+
+function getIdGeneratorFunction(x) {
+    return function() {
+        return x++;
+    }
 }
 
 
