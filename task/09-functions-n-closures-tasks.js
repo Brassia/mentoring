@@ -129,9 +129,23 @@ function memoize(func) {
  * retryer() => 2
  */
 
-function retry(func, maxAttemps) {
+/*function retry(func, maxAttemps) {
     throw new Error('Not implemented');
-};
+};*/
+
+function retry(func, maxAttempts) {
+    return function() {
+        for (var attempt = 0; attempt< maxAttempts; attempt++) {
+            try {
+                func();
+            } catch(e) {
+
+            }
+        }
+
+        return func();
+    }
+}
 
 
 /**
