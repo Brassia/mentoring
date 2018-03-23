@@ -133,6 +133,8 @@ function memoize(func) {
     throw new Error('Not implemented');
 };*/
 
+
+//TODO: You can return func in try block
 function retry(func, maxAttempts) {
     return function() {
         for (var attempt = 0; attempt< maxAttempts; attempt++) {
